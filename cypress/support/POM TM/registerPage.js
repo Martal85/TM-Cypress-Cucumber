@@ -47,6 +47,10 @@ export class RegisterPage {
     checkIfMobileDialingCodeDropdownMenuIsPreSelected(value) {
       cy.get(this.mobileDialingCodeDropdownMenu).contains(value)
     }
+
+    selectMobileDialingCode() {
+      cy.get(this.mobileDialingCodeDropdownMenu).focus().select('gb 44', {force:true})
+    }
     
     fillPhone(value) {
       cy.get(this.mobilePhoneField).click({force:true}).clear().type(value)
@@ -70,6 +74,13 @@ export class RegisterPage {
 
     checkAlertWihtErrorMessageForAlreadyExistEmail() {
       cy.get(this.alertWihtErrorMessageForAlreadyExistEmail).contains(this.alertWihtErrorMessageForAlreadyExistEmailText).should('be.visible')
+    }
+
+    removeTheCaptcha(){
+      cy.get('#register_calc_captcha_row').then((elem) => {
+        const elemHtml = elem.get(0)
+        elemHtml.remove()
+      })
     }
 
 }
